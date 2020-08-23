@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
+import Button from '../../components/Button';
+
 import {
   Container,
   Header,
@@ -31,7 +33,7 @@ export interface Provider {
 const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const { navigate } = useNavigation();
 
   useEffect(() => {
@@ -50,6 +52,10 @@ const Dashboard: React.FC = () => {
     },
     [navigate],
   );
+
+  const handleSignOut = useCallback(() => {
+    signOut();
+  }, [signOut]);
 
   return (
     <Container>
@@ -94,6 +100,8 @@ const Dashboard: React.FC = () => {
           </ProviderContainer>
         )}
       />
+
+      <Button onPress={handleSignOut}>Sair</Button>
     </Container>
   );
 };

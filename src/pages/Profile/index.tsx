@@ -39,7 +39,7 @@ interface ProfileFormData {
 }
 
 const Profile: React.FC = () => {
-  const { user, updateUser, signOut } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
@@ -163,9 +163,8 @@ const Profile: React.FC = () => {
   }, [updateUser, user.id]);
 
   const handleGoBack = useCallback(() => {
-    // navigation.goBack();
-    signOut();
-  }, [signOut]);
+    navigation.goBack();
+  }, [navigation]);
 
   return (
     <>
